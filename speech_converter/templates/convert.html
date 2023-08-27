@@ -1,0 +1,26 @@
+<!-- speech_converter/templates/convert.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speech Converter</title>
+</head>
+<body>
+    <h1>Speech to Speech Converter</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="audio">Upload an audio file:</label>
+        <input type="file" name="audio" accept="audio/*" required>
+        <br>
+        <button type="submit">Convert</button>
+    </form>
+    <br>
+    {% if converted_text %}
+        <h2>Converted Text:</h2>
+        <p>{{ converted_text }}</p>
+        <audio controls>
+            <source src="{% static 'output.mp3' %}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    {% endif %}
+</body>
+</html>
